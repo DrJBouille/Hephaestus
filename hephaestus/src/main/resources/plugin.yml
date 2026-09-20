@@ -1,0 +1,6 @@
+name: Hephaestus
+version: '${version}'
+
+main: org.hyperion.hephaestus.Hephaestus
+api-version: '26.2'
+load: POSTWORLD
