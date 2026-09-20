@@ -1,0 +1,7 @@
+@if (isOpen()) {
+  <div class="w-screen h-screen bg-black/20 fixed flex justify-center items-center z-40" (click)="close.emit()">
+    <div class="w-1/4 h-fit rounded bg-white z-50" (click)="$event.stopPropagation()">
+      <ng-content></ng-content>
+    </div>
+  </div>
+}

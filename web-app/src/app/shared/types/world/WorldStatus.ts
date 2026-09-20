@@ -1,0 +1,6 @@
+enum WorldStatus {
+  CREATED = "CREATED",
+  UPLOADING = "UPLOADING",
+  AVAILABLE = "AVAILABLE",
+  ARCHIVED = "ARCHIVED"
+}

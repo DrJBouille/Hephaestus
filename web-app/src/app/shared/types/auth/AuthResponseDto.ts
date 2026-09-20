@@ -1,0 +1,3 @@
+interface AuthResponseDto {
+  token: string
+}

@@ -1,0 +1,3 @@
+interface CreateWorldsRequestDto {
+  name: string
+}

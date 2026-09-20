@@ -1,0 +1,8 @@
+<div class="w-fit p-4 px-8 border border-red-500 bg-red-500/30 rounded">
+  <div class="flex gap-2">
+    <app-normal-text color="text-red-600" [label]="(problemDetails()?.status)?.toString() ?? ''"></app-normal-text>
+    <app-normal-text color="text-red-600" [label]="problemDetails()?.title ?? ''"></app-normal-text>
+  </div>
+
+  <app-small-text color="text-red-600" [label]="problemDetails()?.detail ?? ''"></app-small-text>
+</div>

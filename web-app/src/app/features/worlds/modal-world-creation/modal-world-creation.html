@@ -1,0 +1,27 @@
+<app-modal [isOpen]="isOpen()" (close)="close.emit()">
+  <form class="w-full flex flex-col gap-3 p-4" [formGroup]="form" (ngSubmit)="submit()">
+
+    <app-title label="World creation"/>
+    <app-subtitle label="Create a new world"/>
+
+    <app-input label="Name" placeholder="new-world" [control]="form.controls.name" />
+    <app-input label="File" type="file" [control]="form.controls.file"/>
+
+    @if (error()) {
+      <div class="error">
+        {{ error() }}
+      </div>
+    }
+
+    <div class="grid grid-cols-2 gap-2 items-center">
+      <app-simple-button [label]="'Cancel'" (click)="close.emit()"/>
+
+      @if (loading()) {
+        <app-button label="Creating..." [disabled]="true"/>
+      } @else {
+        <app-button label="Create"/>
+      }
+    </div>
+  </form>
+
+</app-modal>
