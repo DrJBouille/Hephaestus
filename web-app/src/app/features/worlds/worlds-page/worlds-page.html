@@ -4,6 +4,13 @@
   (worldCreated)="addWorld($event)"
 />
 
+<app-modal-upload-world
+  [world]="selectedWorld"
+  [isOpen]="isOpenUploadWorldModal"
+  (close)="toggleOpenUploadWorldModal(null)"
+  (worldUploaded)="updateWorld($event)"
+/>
+
 <div class="mx-auto max-w-6xl space-y-8 p-8">
 
   <div class="flex items-center justify-between">
@@ -30,7 +37,6 @@
     </div>
 
     @for (world of data().content; track world.id) {
-
       <div
         class="grid grid-cols-[2fr_1fr_1fr_1fr_auto] items-center gap-6 border-b border-gray-800 px-6 py-5 last:border-b-0 hover:bg-gray-100/50">
 
@@ -51,7 +57,11 @@
 
         <app-small-text [label]="(world.updatedAt | date:'dd/MM/yyyy HH:mm') ?? '-'" />
 
-        <app-simple-button [label]="'Download'" (click)="download(world)"/>
+        @if (world.status == WorldStatus.CREATED) {
+          <app-simple-button [label]="'Upload'" (click)="toggleOpenUploadWorldModal(world)"/>
+        } @else {
+          <app-simple-button [label]="'Download'" (click)="download(world)"/>
+        }
 
       </div>
     }

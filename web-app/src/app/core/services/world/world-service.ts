@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { form } from '@angular/forms/signals';
+import { CreateWorldsRequestDto } from '../../../shared/types/world/CreateWorldsRequestDto';
+import { World } from '../../../shared/types/world/World';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class WorldService {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post(this.apiUrl + `/upload/${id}`, formData);
+    return this.http.post<World>(this.apiUrl + `/upload/${id}`, formData);
   }
 
   download(id: String) {

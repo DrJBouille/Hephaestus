@@ -1,5 +1,6 @@
 package com.hephaestus.api.world.api
 
+import com.hephaestus.api.world.application.exceptions.InvalidWorldException
 import com.hephaestus.api.world.application.exceptions.WorldNotFoundException
 import com.hephaestus.api.world.application.exceptions.WorldNotUploadedException
 import org.springframework.http.HttpStatus
@@ -21,10 +22,20 @@ class WorldExceptionHandler {
     }
 
     @ExceptionHandler(WorldNotUploadedException::class)
-    fun handleWorldNotFoundException(e: WorldNotUploadedException): ResponseEntity<ProblemDetail> {
+    fun handleWorldNotUploadedException(e: WorldNotUploadedException): ResponseEntity<ProblemDetail> {
         val problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST)
 
         problemDetail.title = "World not uploaded"
+        problemDetail.detail = e.message
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problemDetail)
+    }
+
+    @ExceptionHandler(InvalidWorldException::class)
+    fun handleInvalidWorldException(e: InvalidWorldException): ResponseEntity<ProblemDetail> {
+        val problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST)
+
+        problemDetail.title = "Invalid World"
         problemDetail.detail = e.message
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problemDetail)

@@ -1,1 +1,12 @@
+<div
+  class="w-screen h-screen absolute flex justify-center pt-4 pointer-events-none transition-opacity duration-100 ease-in-out"
+  [class.opacity-100]="error()"
+  [class.opacity-0]="!error()"
+>
+  @if (error(); as error) {
+    <app-error-modal [problemDetails]="error"/>
+  }
+</div>
+
+
 <router-outlet></router-outlet>

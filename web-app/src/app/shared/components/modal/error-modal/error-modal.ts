@@ -1,6 +1,7 @@
 import { Component, input } from '@angular/core';
 import { NormalText } from '../../text/normal-text/normal-text';
 import { SmallText } from '../../text/small-text/small-text';
+import { ProblemDetails } from '../../../types/error/ProblemDetails';
 
 @Component({
   selector: 'app-error-modal',
