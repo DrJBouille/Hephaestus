@@ -32,6 +32,8 @@ class JpaWorldRepository(private val repository : SpringDataWorldRepository) : W
     private fun WorldEntity.toDomain() : World = World.reconstitute(
             id = WorldId(id),
             name = name,
+            environment = environment,
+            worldType = worldType,
             status = status,
             createdAt = createdAt,
             updatedAt = updatedAt,
@@ -41,6 +43,8 @@ class JpaWorldRepository(private val repository : SpringDataWorldRepository) : W
     private fun World.toEntity() : WorldEntity = WorldEntity(
             id = id.value,
             name = name,
+            environment = environment,
+            worldType = worldType,
             status = status,
             createdAt = createdAt,
             updatedAt = updatedAt,

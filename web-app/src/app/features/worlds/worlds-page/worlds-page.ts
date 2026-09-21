@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { Title } from '../../../shared/components/text/title/title';
 import { SmallText } from '../../../shared/components/text/small-text/small-text';
 import { SimpleButton } from '../../../shared/components/forms/simple-button/simple-button';
+import { World } from '../../../shared/types/world/World';
 
 @Component({
   selector: 'app-worlds-page',

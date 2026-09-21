@@ -43,7 +43,9 @@ class WorldController (
     @PostMapping
     fun create(@Valid @RequestBody request: CreateWorldRequestDto) : WorldResponse {
         return createWorld.execute(
-            name = request.name
+            name = request.name,
+            environment = request.environment,
+            worldType = request.worldType,
         ).toResponse()
     }
 
@@ -91,6 +93,8 @@ class WorldController (
     private fun World.toResponse() = WorldResponse(
         id = id.value,
         name = name,
+        environment = environment,
+        worldType = worldType,
         status = status,
         createdAt = createdAt,
         updatedAt = updatedAt

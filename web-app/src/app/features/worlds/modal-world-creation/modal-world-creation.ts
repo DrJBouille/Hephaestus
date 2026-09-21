@@ -8,6 +8,11 @@ import { Title } from '../../../shared/components/text/title/title';
 import { WorldService } from '../../../core/services/world/world-service';
 import { ErrorHandlingService } from '../../../core/services/error-handling-service/error-handling-service';
 import { SimpleButton } from '../../../shared/components/forms/simple-button/simple-button';
+import { Select } from '../../../shared/components/forms/select/select';
+import { Environment } from '../../../shared/types/world/Environment';
+import { WorldType } from '../../../shared/types/world/WorldType';
+import { World } from '../../../shared/types/world/World';
+import { SelectOption } from '../../../shared/types/SelectOption';
 
 @Component({
   selector: 'app-modal-world-creation',
@@ -20,6 +25,7 @@ import { SimpleButton } from '../../../shared/components/forms/simple-button/sim
     Subtitle,
     Title,
     SimpleButton,
+    Select,
   ],
   templateUrl: './modal-world-creation.html',
   styleUrl: './modal-world-creation.css',
@@ -38,6 +44,8 @@ export class ModalWorldCreation {
 
   form = this.formBuilder.nonNullable.group({
     name: ['', [Validators.required]],
+    environment: [Environment.NORMAL, [Validators.required]],
+    worldType: [WorldType.DEFAULT, [Validators.required]],
     file: [null as File | null, [Validators.required]],
   });
 
@@ -50,21 +58,38 @@ export class ModalWorldCreation {
     this.loading.set(true);
     this.error.set(null);
 
-    const { file, name } = this.form.getRawValue();
+    const { file, name, environment, worldType } = this.form.getRawValue();
     if (!file) return;
 
-    this.worldService.createWorld({ name: name }).subscribe({
-      next: (world) => {
-        this.worldService.upload(world.id, file).subscribe(() => {
-          this.worldCreated.emit(world);
-          this.close.emit();
-        });
-      },
-      error: (err) => {
-        this.errorHandlingService.set(err.error);
-        this.error.set('An error occurred.');
-        this.loading.set(false);
-      },
-    });
+    this.worldService
+      .createWorld({ name: name, environment: environment, worldType: worldType })
+      .subscribe({
+        next: (world) => {
+          this.worldService.upload(world.id, file).subscribe(() => {
+            this.worldCreated.emit(world);
+            this.close.emit();
+          });
+        },
+        error: (err) => {
+          this.errorHandlingService.set(err.error);
+          this.error.set('An error occurred.');
+          this.loading.set(false);
+        },
+      });
   }
+
+  environmentOptions: SelectOption<Environment>[] = [
+    { label: 'Normal', value: Environment.NORMAL },
+    { label: 'Nether', value: Environment.NETHER },
+    { label: 'The End', value: Environment.THE_END },
+    { label: 'Custom', value: Environment.CUSTOM },
+  ];
+
+
+  worldTypeOptions: SelectOption<WorldType>[] = [
+    { label: 'Default', value: WorldType.DEFAULT },
+    { label: 'Flat', value: WorldType.FLAT },
+    { label: 'Large Biomes', value: WorldType.LARGEBIOMES },
+    { label: 'Amplified', value: WorldType.AMPLIFIED },
+  ];
 }

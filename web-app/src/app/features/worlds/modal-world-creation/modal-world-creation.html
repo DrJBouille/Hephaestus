@@ -5,6 +5,8 @@
     <app-subtitle label="Create a new world"/>
 
     <app-input label="Name" placeholder="new-world" [control]="form.controls.name" />
+    <app-select label="Environment" [options]="environmentOptions" [control]="form.controls.environment"/>
+    <app-select label="World Type" [options]="worldTypeOptions" [control]="form.controls.worldType"/>
     <app-input label="File" type="file" [control]="form.controls.file"/>
 
     @if (error()) {

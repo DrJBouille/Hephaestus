@@ -1,0 +1,17 @@
+<div class="w-full flex flex-col">
+  @if (label()) {
+    <label class="block text-slate-600">
+      {{ label() }}
+    </label>
+  }
+
+  <select
+    [name]="label()"
+    [formControl]="control()"
+    class="w-full bg-transparent text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 my-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+  >
+    @for (option of options(); track option.value) {
+      <option [value]="option.value">{{ option.label }}</option>
+    }
+  </select>
+</div>

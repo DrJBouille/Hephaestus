@@ -5,6 +5,8 @@ import java.time.Instant
 class World private constructor(
     val id: WorldId,
     name: String,
+    val environment: Environment,
+    val worldType: WorldType,
     val createdAt: Instant,
     status: WorldStatus = WorldStatus.CREATED,
     updatedAt: Instant = Instant.now(),
@@ -73,15 +75,23 @@ class World private constructor(
     }
 
     companion object {
-        fun create(name: String) : World {
+        fun create(name: String, environment: Environment, worldType: WorldType) : World {
             val now = Instant.now()
 
-            return World(id = WorldId.generate(), name = name, createdAt = now)
+            return World(
+                id = WorldId.generate(),
+                name = name,
+                environment = environment,
+                worldType = worldType,
+                createdAt = now
+            )
         }
 
         fun reconstitute(
             id: WorldId,
             name: String,
+            environment: Environment,
+            worldType: WorldType,
             status: WorldStatus,
             createdAt: Instant,
             updatedAt: Instant,
@@ -90,6 +100,8 @@ class World private constructor(
             return World(
                 id = id,
                 name = name,
+                environment = environment,
+                worldType = worldType,
                 status = status,
                 createdAt = createdAt,
                 updatedAt = updatedAt,

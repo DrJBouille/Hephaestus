@@ -1,6 +1,8 @@
 package com.hephaestus.api.world.infrastructure.persistence
 
+import com.hephaestus.api.world.domain.Environment
 import com.hephaestus.api.world.domain.WorldStatus
+import com.hephaestus.api.world.domain.WorldType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -18,6 +20,14 @@ class WorldEntity (
 
     @Column(nullable = false)
     var name: String,
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    var environment: Environment,
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    var worldType: WorldType,
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

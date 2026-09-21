@@ -1,0 +1,6 @@
+export enum WorldType {
+  DEFAULT = "DEFAULT",
+  FLAT = "FLAT",
+  LARGEBIOMES = "LARGEBIOMES",
+  AMPLIFIED = "AMPLIFIED"
+}
